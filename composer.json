@@ -1,5 +1,5 @@
 {
-    "name": "marshmallow/statistics",
+    "name": "marshmallow/statistics-numerics",
     "description": "This will hold all the statistics logic for the marshmallow core.",
     "keywords": ["marshmallow"],
     "homepage": "https://github.com/Marshmallow-Development/",
