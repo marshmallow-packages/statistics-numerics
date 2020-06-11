@@ -14,26 +14,11 @@ class StatisticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $source = dirname(__DIR__) . '/src/config/statistics.php';
+        $source = __DIR__ . '/../config/statistics.php';
         $this->mergeConfigFrom(
             $source, 'statistics'
         );
-        $this->app->make('Marshmallow\Statistics\App\Http\Statistics\Controllers\StatisticsController');
-        $this->loadViewsFrom(__DIR__.'/views/statistics', 'statistics');
-
-        /**
-         * Merge in the config
-         */
-        // $this->mergeConfigFrom(
-        //     __DIR__.'/config/ecommerce.php', 'ecommerce'
-        // );
-    }
-
-    protected function setUpConfig()
-    {
-        // $source = dirname(__DIR__) . '/src/config/ecommerce.php';
-        // $this->publishes([$source => config_path('ecommerce.php')], 'config');
-        // $this->mergeConfigFrom($source, 'ecommerce');
+        $this->app->make('Marshmallow\Statistics\Http\Statistics\Controllers\StatisticsController');
     }
 
     /**
@@ -43,35 +28,11 @@ class StatisticsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->setUpConfig();
-
-        /**
-         * Views
-         */
-        $this->loadViewsFrom(__DIR__.'/views', 'statistics');
-        $this->publishes([
-            __DIR__.'/views' => resource_path('views/marshmallow/statistics'),
-        ], 'views');
-
-        /**
-         * Migrations
-         */
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-
-
-        /**
-         * Translations
-         */
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'statistics');
-        $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang/marshmallow/statistics')
-        ], 'translations');
-
         /**
          * Config
          */
         $this->publishes([
-            __DIR__.'/config/statistics.php' => config_path('statistics.php')
+            __DIR__ . '/../config/statistics.php' => config_path('statistics.php')
         ], 'config');
 
         /**
@@ -84,9 +45,8 @@ class StatisticsServiceProvider extends ServiceProvider
          */
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Marshmallow\Statistics\App\Console\Commands\SetupCommand::class,
+                \Marshmallow\Statistics\Console\Commands\SetupCommand::class,
             ]);
         }
-        $this->app->make(Factory::class)->load(__DIR__.'/database/factories');
     }
 }

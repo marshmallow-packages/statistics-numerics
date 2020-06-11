@@ -1,28 +1,27 @@
 <?php
 
-namespace Marshmallow\Statistics\App\Http\Statistics\Controllers;
+namespace Marshmallow\Statistics\Http\Statistics\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Marshmallow\Statistics\App\Statistics\Gauge;
-use Marshmallow\Statistics\App\Statistics\Label;
-use Marshmallow\Statistics\App\Statistics\Timer;
-use Marshmallow\Statistics\App\Statistics\Number;
-use Marshmallow\Statistics\App\Statistics\TopList;
-use Marshmallow\Statistics\App\Statistics\PieChart;
-use Marshmallow\Statistics\App\Statistics\LineGraph;
-use Marshmallow\Statistics\App\Statistics\DayDensity;
-use Marshmallow\Statistics\App\Statistics\HourDensity;
-use Marshmallow\Statistics\App\Statistics\NamedLineGraph;
-use Marshmallow\Statistics\App\Statistics\NumberAndDifference;
+use Marshmallow\Statistics\Statistics\Gauge;
+use Marshmallow\Statistics\Statistics\Label;
+use Marshmallow\Statistics\Statistics\Timer;
+use Marshmallow\Statistics\Statistics\Number;
+use Marshmallow\Statistics\Statistics\TopList;
+use Marshmallow\Statistics\Statistics\PieChart;
+use Marshmallow\Statistics\Statistics\LineGraph;
+use Marshmallow\Statistics\Statistics\DayDensity;
+use Marshmallow\Statistics\Statistics\HourDensity;
+use Marshmallow\Statistics\Statistics\NamedLineGraph;
+use Marshmallow\Statistics\Statistics\NumberAndDifference;
 
 class StatisticsController extends Controller
 {
-    public function __construct ()
+    public function __construct()
     {
         $this->middleware(['auth.basic', function ($request, $next) {
-            
+
             $user = auth()->user();
             if (!$user) {
                 abort(403);
@@ -35,8 +34,8 @@ class StatisticsController extends Controller
             return $next($request);
         }]);
     }
-    
-    public function toplist ()
+
+    public function toplist()
     {
         return (new TopList)->title('Developer')
                             ->valueTitle('Lines of code')
@@ -44,13 +43,13 @@ class StatisticsController extends Controller
                             ->value('Daan', 30);
     }
 
-    public function timer ()
+    public function timer()
     {
         return (new Timer)->title('Timer')
                                 ->date(Carbon::now()->addDays(2));
     }
 
-    public function piechart ()
+    public function piechart()
     {
         return (new PieChart)->title('PieChart')
                                 ->value('Sunday', 1450)
@@ -58,14 +57,14 @@ class StatisticsController extends Controller
                                 ->value('Friday', 1850);
     }
 
-    public function numberanddifference ()
+    public function numberanddifference()
     {
         return (new NumberAndDifference)->title('NumberAndDifference')
                                 ->value(1450)
                                 ->compareTo(1250);
     }
 
-    public function namedlinegraph ()
+    public function namedlinegraph()
     {
         return (new NamedLineGraph)->title('NamedLineGraph')
                                 ->value('Sunday', 1450)
@@ -73,7 +72,7 @@ class StatisticsController extends Controller
                                 ->value('Friday', 1850);
     }
 
-    public function linegraph ()
+    public function linegraph()
     {
         return (new LineGraph)->title('LineGraph')
                                 ->value(1450)
@@ -81,7 +80,7 @@ class StatisticsController extends Controller
                                 ->value(1850);
     }
 
-    public function hourdensity ()
+    public function hourdensity()
     {
         return (new HourDensity)->title('HourDensity')
                                 ->addHours([
@@ -89,7 +88,7 @@ class StatisticsController extends Controller
                                 ]);
     }
 
-    public function gauge ()
+    public function gauge()
     {
         return (new Gauge)->title('%')
                             ->min(0)
@@ -97,7 +96,7 @@ class StatisticsController extends Controller
                             ->max(100);
     }
 
-    public function daydensity ()
+    public function daydensity()
     {
         return (new DayDensity)->title('DayDensity')
                             ->addDay(Carbon::now(), 100)
@@ -106,13 +105,13 @@ class StatisticsController extends Controller
                             ->addDay(Carbon::now()->subDays(3), 75);
     }
 
-    public function number ()
+    public function number()
     {
         return (new Number)->title('Number')
                             ->value(123);
     }
 
-    public function label ()
+    public function label()
     {
         return (new Label)->title('Label')
                             ->value('passed');

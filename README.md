@@ -61,13 +61,13 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Marshmallow\Statistics\App\Http\Statistics\Controllers\StatisticsController as StatisticsBaseController;
+use Marshmallow\Statistics\Http\Statistics\Controllers\StatisticsController as StatisticsBaseController;
 
 class MyOwnStatisticsController extends StatisticsBaseController
 {
     public function salesToday ()
     {
-    	return (new \Marshmallow\Statistics\App\Statistics\Number)->title('Verkoop vandaag')
+    	return (new \Marshmallow\Statistics\Statistics\Number)->title('Verkoop vandaag')
                     ->color('green')
                     ->value(Orders::get()->count());
     }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Marshmallow\Statistics\App\Statistics;
+namespace Marshmallow\Statistics\Statistics;
 
-use Marshmallow\Statistics\App\Statistics\Traits\StandardOptions;
+use Marshmallow\Statistics\Statistics\Traits\StandardOptions;
 use Exception;
 
-class HourDensity {
-
+class HourDensity
+{
 	use StandardOptions;
 
-	public function addHours (array $hours)
+	public function addHours(array $hours)
 	{
 		if (count($hours) != 24) {
 			throw new Exception("The hours array should have exactly 24 items");
@@ -21,8 +21,7 @@ class HourDensity {
 				'value' => $value
 			];
 		}
-		
+
 		return $this;
 	}
-
 }
