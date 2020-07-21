@@ -7,7 +7,7 @@ Met de Marshmallow Statistics package is het mogelijk om snel en gemakkelijk jso
 
 ### Installatie
 ```
-composer require marshmallow/statistics
+composer require marshmallow/statistics-numerics
 ```
 
 Als composer klaar is, maak dan de Basic Auth gebruiker aan die toegang heeft om deze JSON bestanden online te bekijken via onderstaande artisan command.
